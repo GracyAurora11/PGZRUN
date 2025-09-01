@@ -16,12 +16,32 @@ def ctf():
         lof.append(flo)
     sat=time.time()
 def draw():
+    global sat,tot
     screen.blit('sunset field.jpg',(0,0))
     cof=1
     for i in lof:
         i.draw()
-        screen.draw.text(str(cof),(i.x,i.y+10),color='dark green')
+        screen.draw.text(str(cof),(i.x,i.y+10),color='blue')
+        cof+=1
+    for l in lin:
+        screen.draw.line(l[0],l[1],color='white')
+    #displaying timer
+    if flc<tnf:
+        tot=time.time()-sat
+        #tot=round(tot,1)
+        screen.draw.text(str(round(tot,1)),(25,25),color='blue')
 def update():
     pass
+def on_mouse_down(pos):
+    global flc,lin
+    if flc<tnf:
+        if lof[flc].collidepoint(pos):
+            if flc:
+                lin.append((lof[flc-1].pos,lof[flc].pos))
+            flc+=1
+        else:
+            lin=[]
+            flc=0
+
 ctf()
 pgzrun.go()
