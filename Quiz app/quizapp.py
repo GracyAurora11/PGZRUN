@@ -32,7 +32,7 @@ def draw():
     #textboxes
     screen.draw.textbox('SKIP',skipbox,color='powderblue',angle=-90)
     screen.draw.textbox(str(tcs),timebox,color='powderblue')
-    mes='Welcome to the quiz app game!'
+    mes='Welcome to the quiz app game!'+ f'Q:{index} of {qec}'
     screen.draw.textbox(mes,movingbox,color='mediumaquamarine')
     screen.draw.textbox(question[0].strip(),qbox,color='mediumaquamarine')
     fin=1
@@ -66,7 +66,40 @@ def eoq():
     index+=1
     return list1.pop(0).split(',')
 def on_mouse_down(pos):
-
+    ind=1
+    for i in opt:
+        if i.collidepoint(pos):
+            if ind==int(question[5]):
+                cas()
+            else:
+                over()
+        ind+=1
+    if skipbox.collidepoint(pos):
+        skip()
+#function for game over
+def over():
+    global over,tcs,question
+    gao=True
+    tcs=0
+    mess=f'GAME OVER!,SCORE:{sco}'
+    question=[mess,'-','-','-','-',5]
+#function for correct answer
+def cas():
+    global tcs,question,sco,list1
+    sco+=1
+    if list1:
+        question=eoq()
+        tcs=10
+    else:
+        over()
+#function for skip
+def skip():
+    global question,tcs
+    if list1 and not gao:
+        question=eoq()
+        tcs=10
+    else:
+        over()
 rtf()
 question=eoq()
 clock.schedule_interval(timer,1)
