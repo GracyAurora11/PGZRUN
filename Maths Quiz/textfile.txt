@@ -1,0 +1,6 @@
+What is the smallest prime number?,0,1,2,3,3
+What is 15 squared?,150,225,45,30,2
+What is 06:32pm in a 24 hour format?,18:32,16:32,12:32,6:32am,1
+What is x equal to in 3x+5=20?,4,3,5,15,3
+What is 16 multiplied by 15?,1500,1600,400,240,4
+What is 35% of 240?,70,215,105,84,4
