@@ -11,12 +11,18 @@ gameover=False
 gamecomplete=False
 
 def draw():
-    global items
+    global items,gamecomplete,gameover,plastic
     screen.clear()
     screen.blit('background.png',(0,0))
 #update function is to check if there are no items in the list then it will create items automatically
-    for i in items:
-        i.draw()
+
+    if gameover:
+        screen.draw.text('!GAME OVER!',fontsize=60,center=(500,100),color='pink')
+    elif gamecomplete:
+        screen.draw.text('!YOU HAVE WON THE GAME!',fontsize=60,center=(500,100),color='pink')
+    else:
+        for i in items:
+            i.draw()
 
 def update():
     global items
@@ -68,4 +74,29 @@ def animateitems(itemstoanimate):
 def handlegameover():
     global gameover
     gamover=True
+
+def gamecomplete():
+    global currentlevel,items,animations,gamecomplete
+    stopanimations(animations)
+    if currentlevel==finallevel:
+        gamecomplete=True
+    else:
+        currentlevel+=1
+        items=[]
+        animations=[]
+
+def stopanimations(animationstostop):
+    for i in animationstostop:
+        if i.running:
+            i.stop()
+
+def on_mouse_down(pos):
+    global items, currentlevel
+    for i in items:
+        if i.collidepoint(pos):
+            if 'paperbag.png' in i.image:
+                gamecomplete()
+            else:
+                handlegameover()
+
 pgzrun.go()
