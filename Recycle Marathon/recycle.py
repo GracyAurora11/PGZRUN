@@ -73,9 +73,9 @@ def animateitems(itemstoanimate):
 #changing the state of the game from playing the game and to it being over
 def handlegameover():
     global gameover
-    gamover=True
+    gameover=True
 
-def gamecomplete():
+def handlegamecomplete():
     global currentlevel,items,animations,gamecomplete
     stopanimations(animations)
     if currentlevel==finallevel:
@@ -95,7 +95,7 @@ def on_mouse_down(pos):
     for i in items:
         if i.collidepoint(pos):
             if 'paperbag.png' in i.image:
-                gamecomplete()
+                handlegamecomplete()
             else:
                 handlegameover()
 
